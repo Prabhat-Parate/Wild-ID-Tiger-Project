@@ -1,0 +1,12 @@
+{
+  "threshold": null,
+  "calibration": "Unavailable: this dataset has no individual-tiger identity labels. Identity acceptance is disabled; result remains UNKNOWN.",
+  "split_method": "Source train/val partitions are for pose estimation. No identity-labelled validation/test split, identity threshold or re-identification metrics can be computed.",
+  "validation": [],
+  "test": [],
+  "demo": [],
+  "seed": 0,
+  "feature_version": "gradient-histogram-v1",
+  "dataset_commit": "81e28ddc5ce42e30671a261e0aa9b20fec81b065",
+  "identity_labels_available": false
+}

@@ -1,0 +1,1 @@
+Chromium FAKE CAMERA TEST FIXTURE ONLY, not a live wildlife recording. tiger-camera.y4m is a one-second 5fps conversion of the bundled Hugging Face Tiger-pose train/images/Frame_0.jpg. Same repository-stated AGPL-3.0; corresponding original/label/licence retained. No evaluation independence claimed. Regenerate: python scripts/make_camera_fixture.py.

@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+__pycache__/
+.pytest_cache/
+.venv/
+test-results/
+playwright-report/
+*.tsbuildinfo
+# Raw source metadata contains precise wildlife coordinates; do not commit/serve it.
+data/source/initial_metadata.json
+data/source/final_metadata.json
+
+# Generated operator-only setup cache and large reproducible detector weights
+.cache/
+models/**/*.onnx

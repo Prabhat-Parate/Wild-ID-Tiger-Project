@@ -1,0 +1,13 @@
+
+> wild-id@0.2.0 build
+> tsc -b && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 1599 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.79 kB │ gzip:   0.46 kB
+dist/assets/index-TMwW1ec_.css   41.68 kB │ gzip:   9.67 kB
+dist/assets/index-svHbnC-m.js   317.40 kB │ gzip: 100.44 kB
+✓ built in 3.20s

@@ -1,0 +1,22 @@
+{
+  "source": "https://huggingface.co/BVRA/MegaDescriptor-L-384",
+  "commit": "33b3c6f4ee0c386a4126cc3dcd23843920613fa1",
+  "card_metadata": {
+    "tags": [
+      "image-classification",
+      "ecology",
+      "animals",
+      "re-identification"
+    ],
+    "library_name": "wildlife-datasets",
+    "license": "cc-by-nc-4.0"
+  },
+  "files": [
+    ".gitattributes",
+    "README.md",
+    "config.json",
+    "pytorch_model.bin"
+  ],
+  "connected": false,
+  "weights_downloaded": false
+}

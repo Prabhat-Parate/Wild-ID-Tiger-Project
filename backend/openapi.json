@@ -1,0 +1,1254 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Wild-ID Research API",
+    "version": "0.2.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/dataset": {
+      "get": {
+        "summary": "Dataset",
+        "operationId": "dataset_api_dataset_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/individuals": {
+      "get": {
+        "summary": "Individuals",
+        "operationId": "individuals_api_individuals_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/evaluation-report": {
+      "get": {
+        "summary": "Evaluation Report",
+        "operationId": "evaluation_report_api_evaluation_report_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/media/{filename}": {
+      "get": {
+        "summary": "Media",
+        "operationId": "media_api_media__filename__get",
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Filename"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/detect": {
+      "post": {
+        "summary": "Detect",
+        "operationId": "detect_api_detect_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_detect_api_detect_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetectionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/analyze": {
+      "post": {
+        "summary": "Analyze",
+        "operationId": "analyze_api_analyze_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_api_analyze_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sightings": {
+      "get": {
+        "summary": "Sightings",
+        "operationId": "sightings_api_sightings_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/evaluations": {
+      "get": {
+        "summary": "Evaluations",
+        "operationId": "evaluations_api_evaluations_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reviews": {
+      "post": {
+        "summary": "Reviews",
+        "operationId": "reviews_api_reviews_post",
+        "responses": {
+          "501": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Analysis": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "Timestamp"
+          },
+          "query_id": {
+            "type": "string",
+            "title": "Query Id"
+          },
+          "method": {
+            "type": "string",
+            "title": "Method"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "dataset_version": {
+            "type": "string",
+            "title": "Dataset Version"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Threshold"
+          },
+          "criterion": {
+            "type": "string",
+            "title": "Criterion"
+          },
+          "detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Detection"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "candidates": {
+            "items": {
+              "$ref": "#/components/schemas/Candidate"
+            },
+            "type": "array",
+            "title": "Candidates"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "timestamp",
+          "query_id",
+          "method",
+          "model",
+          "dataset_version",
+          "status",
+          "threshold",
+          "criterion",
+          "detection",
+          "candidates",
+          "explanation"
+        ],
+        "title": "Analysis"
+      },
+      "Body_analyze_api_analyze_post": {
+        "properties": {
+          "record_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Record Id"
+          },
+          "file": {
+            "anyOf": [
+              {
+                "type": "string",
+                "contentMediaType": "application/octet-stream"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File"
+          },
+          "detect_first": {
+            "type": "boolean",
+            "title": "Detect First",
+            "default": false
+          },
+          "detection_box": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detection Box"
+          }
+        },
+        "type": "object",
+        "title": "Body_analyze_api_analyze_post"
+      },
+      "Body_detect_api_detect_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_detect_api_detect_post"
+      },
+      "Candidate": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "image_uuid": {
+            "type": "string",
+            "title": "Image Uuid"
+          },
+          "individual_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Individual Id"
+          },
+          "species": {
+            "type": "string",
+            "title": "Species"
+          },
+          "source_path": {
+            "type": "string",
+            "title": "Source Path"
+          },
+          "width": {
+            "type": "integer",
+            "title": "Width"
+          },
+          "height": {
+            "type": "integer",
+            "title": "Height"
+          },
+          "datetime": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datetime"
+          },
+          "bbox": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Bbox"
+          },
+          "region_bbox": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region Bbox"
+          },
+          "viewpoint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Viewpoint"
+          },
+          "CA_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ca Score"
+          },
+          "manual": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manual"
+          },
+          "split": {
+            "type": "string",
+            "title": "Split"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "withheld_identity": {
+            "type": "boolean",
+            "title": "Withheld Identity"
+          },
+          "image_url": {
+            "type": "string",
+            "title": "Image Url"
+          },
+          "crop_url": {
+            "type": "string",
+            "title": "Crop Url"
+          },
+          "source_filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Filename"
+          },
+          "source_split": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Split"
+          },
+          "source_annotation_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Annotation Path"
+          },
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "image_uuid",
+          "individual_id",
+          "species",
+          "source_path",
+          "width",
+          "height",
+          "datetime",
+          "bbox",
+          "region_bbox",
+          "viewpoint",
+          "CA_score",
+          "manual",
+          "split",
+          "role",
+          "withheld_identity",
+          "image_url",
+          "crop_url",
+          "rank",
+          "score"
+        ],
+        "title": "Candidate"
+      },
+      "Dataset": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "commit": {
+            "type": "string",
+            "title": "Commit"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "selection": {
+            "type": "string",
+            "title": "Selection"
+          },
+          "source_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Source Counts"
+          },
+          "records": {
+            "items": {
+              "$ref": "#/components/schemas/RecordImage"
+            },
+            "type": "array",
+            "title": "Records"
+          },
+          "information": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DatasetInformation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "source",
+          "commit",
+          "license",
+          "selection",
+          "source_counts",
+          "records"
+        ],
+        "title": "Dataset"
+      },
+      "DatasetInformation": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source Url"
+          },
+          "card_license_declaration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Card License Declaration"
+          },
+          "attribution_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attribution Text"
+          },
+          "included_image_count": {
+            "type": "integer",
+            "title": "Included Image Count"
+          },
+          "original_image_file_count": {
+            "type": "integer",
+            "title": "Original Image File Count"
+          },
+          "crop_file_count": {
+            "type": "integer",
+            "title": "Crop File Count"
+          },
+          "source_train_image_count": {
+            "type": "integer",
+            "title": "Source Train Image Count"
+          },
+          "source_validation_image_count": {
+            "type": "integer",
+            "title": "Source Validation Image Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "source_url",
+          "card_license_declaration",
+          "attribution_text",
+          "included_image_count",
+          "original_image_file_count",
+          "crop_file_count",
+          "source_train_image_count",
+          "source_validation_image_count"
+        ],
+        "title": "DatasetInformation"
+      },
+      "DatasetStatus": {
+        "properties": {
+          "commit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commit"
+          },
+          "records": {
+            "type": "integer",
+            "title": "Records"
+          },
+          "images": {
+            "type": "integer",
+            "title": "Images"
+          },
+          "individuals": {
+            "type": "integer",
+            "title": "Individuals"
+          },
+          "reference_records": {
+            "type": "integer",
+            "title": "Reference Records"
+          }
+        },
+        "type": "object",
+        "required": [
+          "commit",
+          "records",
+          "images",
+          "individuals",
+          "reference_records"
+        ],
+        "title": "DatasetStatus"
+      },
+      "Detection": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "bbox": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Bbox"
+          },
+          "crop_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crop Url"
+          },
+          "normalized_bbox": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Normalized Bbox"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "detector_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detector Score"
+          },
+          "detector_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detector Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source",
+          "bbox",
+          "crop_url"
+        ],
+        "title": "Detection"
+      },
+      "DetectionResponse": {
+        "properties": {
+          "detections": {
+            "items": {
+              "$ref": "#/components/schemas/FrameDetection"
+            },
+            "type": "array",
+            "title": "Detections"
+          },
+          "detector": {
+            "type": "string",
+            "title": "Detector"
+          },
+          "detector_version": {
+            "type": "string",
+            "title": "Detector Version"
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "Timestamp"
+          },
+          "latency_ms": {
+            "type": "number",
+            "title": "Latency Ms"
+          },
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "score_cutoff": {
+            "type": "number",
+            "title": "Score Cutoff"
+          },
+          "cutoff_basis": {
+            "type": "string",
+            "title": "Cutoff Basis",
+            "default": "configurable heuristic, not validated"
+          }
+        },
+        "type": "object",
+        "required": [
+          "detections",
+          "detector",
+          "detector_version",
+          "timestamp",
+          "latency_ms",
+          "request_id",
+          "score_cutoff"
+        ],
+        "title": "DetectionResponse"
+      },
+      "FrameDetection": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "bbox": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Bbox"
+          },
+          "image_width": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Image Width"
+          },
+          "image_height": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Image Height"
+          }
+        },
+        "type": "object",
+        "required": [
+          "label",
+          "score",
+          "bbox",
+          "image_width",
+          "image_height"
+        ],
+        "title": "FrameDetection"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Health": {
+        "properties": {
+          "detector_loaded": {
+            "type": "boolean",
+            "title": "Detector Loaded",
+            "default": false
+          },
+          "detector_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detector Name"
+          },
+          "detector_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detector Version"
+          },
+          "detector_labels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Detector Labels",
+            "default": []
+          },
+          "detector_score_cutoff": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detector Score Cutoff"
+          },
+          "detector_scope": {
+            "type": "string",
+            "title": "Detector Scope",
+            "default": "Open-vocabulary configured prompts; not validated on field camera-trap footage of tigers."
+          },
+          "detector_setup": {
+            "type": "string",
+            "title": "Detector Setup",
+            "default": "Install requirements, run python scripts/setup_detector.py, then restart the backend. No runtime downloads."
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "model_loaded": {
+            "type": "boolean",
+            "title": "Model Loaded"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "method": {
+            "type": "string",
+            "title": "Method"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "dataset": {
+            "$ref": "#/components/schemas/DatasetStatus"
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Threshold"
+          },
+          "calibration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calibration"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "model_loaded",
+          "model",
+          "method",
+          "version",
+          "dataset",
+          "threshold",
+          "calibration"
+        ],
+        "title": "Health"
+      },
+      "RecordImage": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "image_uuid": {
+            "type": "string",
+            "title": "Image Uuid"
+          },
+          "individual_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Individual Id"
+          },
+          "species": {
+            "type": "string",
+            "title": "Species"
+          },
+          "source_path": {
+            "type": "string",
+            "title": "Source Path"
+          },
+          "width": {
+            "type": "integer",
+            "title": "Width"
+          },
+          "height": {
+            "type": "integer",
+            "title": "Height"
+          },
+          "datetime": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datetime"
+          },
+          "bbox": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Bbox"
+          },
+          "region_bbox": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region Bbox"
+          },
+          "viewpoint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Viewpoint"
+          },
+          "CA_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ca Score"
+          },
+          "manual": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manual"
+          },
+          "split": {
+            "type": "string",
+            "title": "Split"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "withheld_identity": {
+            "type": "boolean",
+            "title": "Withheld Identity"
+          },
+          "image_url": {
+            "type": "string",
+            "title": "Image Url"
+          },
+          "crop_url": {
+            "type": "string",
+            "title": "Crop Url"
+          },
+          "source_filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Filename"
+          },
+          "source_split": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Split"
+          },
+          "source_annotation_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Annotation Path"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "image_uuid",
+          "individual_id",
+          "species",
+          "source_path",
+          "width",
+          "height",
+          "datetime",
+          "bbox",
+          "region_bbox",
+          "viewpoint",
+          "CA_score",
+          "manual",
+          "split",
+          "role",
+          "withheld_identity",
+          "image_url",
+          "crop_url"
+        ],
+        "title": "RecordImage"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

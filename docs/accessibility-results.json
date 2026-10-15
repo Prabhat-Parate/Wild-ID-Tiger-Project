@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/",
+    "violations": []
+  },
+  {
+    "path": "/identify",
+    "violations": []
+  },
+  {
+    "path": "/gallery",
+    "violations": []
+  },
+  {
+    "path": "/history",
+    "violations": []
+  },
+  {
+    "path": "/evaluation",
+    "violations": []
+  },
+  {
+    "path": "/about",
+    "violations": []
+  },
+  {
+    "path": "/help",
+    "violations": []
+  },
+  {
+    "path": "/privacy",
+    "violations": []
+  },
+  {
+    "path": "/responsible",
+    "violations": []
+  },
+  {
+    "path": "/contact",
+    "violations": []
+  }
+]

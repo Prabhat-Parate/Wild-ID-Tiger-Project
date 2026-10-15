@@ -1,0 +1,34 @@
+{
+  "model_repo": "Instemic/yolo-world-onnx",
+  "model_commit": "7e1d02c9467c32b141df81890737490764776785",
+  "model_file": "yolov8s-worldv2.onnx",
+  "model_license": "AGPL-3.0",
+  "labels": [
+    "Tiger",
+    "Lion",
+    "Leopard",
+    "Cat",
+    "Dog",
+    "Person",
+    "Animal"
+  ],
+  "prompts": [
+    "a photo of a tiger",
+    "a photo of a lion",
+    "a photo of a leopard",
+    "a photo of a cat",
+    "a photo of a dog",
+    "a photo of a person",
+    "a photo of a animal"
+  ],
+  "text_repo": "Xenova/clip-vit-base-patch32",
+  "text_commit": "d15189d7028b43f1d3e65039190477f6af591c2a",
+  "text_source": "openai/clip-vit-base-patch32 (OpenAI CLIP, MIT)",
+  "text_onnx_bytes": 64504507,
+  "model_bytes": 51142204,
+  "onnxruntime": "1.31.0",
+  "sha256": {
+    "model.onnx": "381ced485b23ed8f06de3e82bb2745e1420c181c64f0a176784c34a959d550a1",
+    "text_features.npy": "cfbde9949797eae8b7dd4c1969cd8051be77e87c1e09c1d7a9072f12ee061fd7"
+  }
+}

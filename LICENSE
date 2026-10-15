@@ -1,0 +1,25 @@
+WILD-ID ORIGINAL CODE — LICENCE PENDING TEAM APPROVAL
+
+No original project-code licence is granted by this file.
+MIT was proposed to Beyond Infinity, but the licence question was skipped.
+Team/institution approval remains required. Do not represent the app as MIT-licensed.
+
+THIRD-PARTY MATERIAL
+- Dataset: Ultralytics/Tiger-pose on Hugging Face, repository-stated AGPL-3.0.
+  Full original dataset licence: data/source/tiger/LICENSE.
+  Source: https://huggingface.co/datasets/Ultralytics/Tiger-pose
+  Pinned version, modifications and corresponding selected source: DATASET.md.
+- Other dependencies: see THIRD_PARTY_NOTICES.md and copied available notices.
+
+Do not assume an original-code licence proposal overrides dataset or dependency obligations.
+Public redistribution/deployment requires team/institution licence and provenance review.
+
+Local detection addition: YOLOv8s-World v2 ONNX weights carry the source
+repository's AGPL-3.0 declaration; full text/source/commit/checksums are in
+models/tiger-open-vocabulary/ and MODEL_CARD.md. CLIP text setup derives from
+OpenAI CLIP (MIT); ONNX Runtime is MIT, with its dependency notices retained.
+These notices do not change the pending licence of original project code.
+Applicable corresponding-source/network-service/copyleft obligations and
+export-source completeness require review before public hosting/distribution.
+No blanket public-deployment permission or non-commercial-model exemption is
+asserted by this file.

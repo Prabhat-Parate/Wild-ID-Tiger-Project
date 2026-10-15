@@ -1,0 +1,23 @@
+{
+  "evaluation_type": "qualitative selection/demo check, NOT accuracy",
+  "labelled_evaluation": "No labelled detector evaluation has been run.",
+  "detector": "YOLOv8s-World v2 (ONNX, configured prompts)",
+  "detector_version": "7e1d02c9467c32b141df81890737490764776785",
+  "score_cutoff": 0.25,
+  "cutoff_basis": "configurable heuristic, not validated",
+  "images_run": 32,
+  "images_with_any_detection": 32,
+  "images_with_tiger_label": 8,
+  "raw_output_label_counts": {
+    "Tiger": 8,
+    "Leopard": 24
+  },
+  "latency_ms": {
+    "first": 171.23,
+    "median": 156.22,
+    "min": 142.77,
+    "max": 213.09
+  },
+  "hardware": "2 CPU vCPUs, no exposed NVIDIA GPU; ONNX Runtime CPUExecutionProvider, 2 intra-op / 1 inter-op threads",
+  "split": "None: all bundled source photos used only for qualitative selection/demo. Adjacent/near-duplicate video frames not separated; no held-out negative set. No precision, recall, detection-rate percentage or accuracy computed."
+}

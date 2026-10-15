@@ -1,0 +1,12 @@
+src/api.ts 94ms
+src/App.tsx 299ms
+src/InfoPages.tsx 45ms
+src/main.tsx 8ms
+src/session.test.ts 15ms
+src/session.ts 14ms
+src/styles.css 156ms
+src/config/project.ts 4ms
+vite.config.ts 4ms
+vitest.config.ts 2ms
+playwright.config.ts 7ms
+tests/browser/workspace.spec.ts 84ms

@@ -1,0 +1,29 @@
+{
+  "production_origin": "http://127.0.0.1:8000",
+  "build_assets": [
+    "index-TMwW1ec_.css",
+    "index-svHbnC-m.js"
+  ],
+  "health_status": "ok",
+  "photographs": 32,
+  "returned_candidates": 5,
+  "loaded_comparison_photographs": 6,
+  "descriptor": "Spatial gradient histogram v1 (untrained)",
+  "method": "image retrieval",
+  "identity_status": "UNKNOWN",
+  "threshold": null,
+  "source_filenames": [
+    "Frame_37.jpg",
+    "Frame_142.jpg",
+    "Frame_67.jpg",
+    "Frame_7.jpg",
+    "Frame_105.jpg"
+  ],
+  "score_values_equal_backend_response": true,
+  "recorded_evaluation_rows": 5,
+  "source_metadata_present": true,
+  "csp_and_no_referrer": true,
+  "external_runtime_requests": [],
+  "page_errors": [],
+  "result": "PASS"
+}

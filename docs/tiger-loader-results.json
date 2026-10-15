@@ -1,0 +1,9 @@
+{
+  "source": "https://huggingface.co/datasets/Ultralytics/Tiger-pose",
+  "commit": "81e28ddc5ce42e30671a261e0aa9b20fec81b065",
+  "source_image_files": 153,
+  "source_image_bytes": 14183221,
+  "cached_photographs": 32,
+  "identity_labels": "absent",
+  "threshold": null
+}

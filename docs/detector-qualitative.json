@@ -1,0 +1,601 @@
+{
+  "evaluation_type": "qualitative selection/demo check, NOT accuracy",
+  "labelled_evaluation": "No labelled detector evaluation has been run.",
+  "detector": "YOLOv8s-World v2 (ONNX, configured prompts)",
+  "detector_version": "7e1d02c9467c32b141df81890737490764776785",
+  "score_cutoff": 0.25,
+  "cutoff_basis": "configurable heuristic, not validated",
+  "images_run": 32,
+  "images_with_any_detection": 32,
+  "images_with_tiger_label": 8,
+  "raw_output_label_counts": {
+    "Tiger": 8,
+    "Leopard": 24
+  },
+  "latency_ms": {
+    "first": 171.23,
+    "median": 156.22,
+    "min": 142.77,
+    "max": 213.09
+  },
+  "hardware": "2 CPU vCPUs, no exposed NVIDIA GPU; ONNX Runtime CPUExecutionProvider, 2 intra-op / 1 inter-op threads",
+  "split": "None: all bundled source photos used only for qualitative selection/demo. Adjacent/near-duplicate video frames not separated; no held-out negative set. No precision, recall, detection-rate percentage or accuracy computed.",
+  "rows": [
+    {
+      "source_path": "train/images/Frame_0.jpg",
+      "latency_ms": 171.23,
+      "detections": [
+        {
+          "label": "Tiger",
+          "score": 0.48301586508750916,
+          "bbox": [
+            0.1423739492893219,
+            0.20339423418045044,
+            0.8322458267211914,
+            0.8021355271339417
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_7.jpg",
+      "latency_ms": 170.6,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.5497282147407532,
+          "bbox": [
+            0.16174697875976562,
+            0.19002380967140198,
+            0.8484618067741394,
+            0.7994678020477295
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_11.jpg",
+      "latency_ms": 155.96,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.48143336176872253,
+          "bbox": [
+            0.1570403277873993,
+            0.18920309841632843,
+            0.853042721748352,
+            0.7981812953948975
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_25.jpg",
+      "latency_ms": 160.33,
+      "detections": [
+        {
+          "label": "Tiger",
+          "score": 0.516713559627533,
+          "bbox": [
+            0.1429448127746582,
+            0.17864036560058594,
+            0.8172582387924194,
+            0.7818871140480042
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_15.jpg",
+      "latency_ms": 168.9,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.7146919965744019,
+          "bbox": [
+            0.14999905228614807,
+            0.20080380141735077,
+            0.8650385141372681,
+            0.7992479205131531
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_37.jpg",
+      "latency_ms": 164.67,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.6008097529411316,
+          "bbox": [
+            0.11238257586956024,
+            0.18715380132198334,
+            0.7956372499465942,
+            0.7777583003044128
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_100.jpg",
+      "latency_ms": 159.38,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.5952140688896179,
+          "bbox": [
+            0.1255412995815277,
+            0.2157658487558365,
+            0.7873387336730957,
+            0.8131810426712036
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_46.jpg",
+      "latency_ms": 156.07,
+      "detections": [
+        {
+          "label": "Tiger",
+          "score": 0.5127393007278442,
+          "bbox": [
+            0.09123816341161728,
+            0.21436378359794617,
+            0.7785548567771912,
+            0.8100569248199463
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_105.jpg",
+      "latency_ms": 153.41,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.5492095351219177,
+          "bbox": [
+            0.15175819396972656,
+            0.23034757375717163,
+            0.8005617260932922,
+            0.8083837032318115
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_58.jpg",
+      "latency_ms": 162.96,
+      "detections": [
+        {
+          "label": "Tiger",
+          "score": 0.6126996278762817,
+          "bbox": [
+            0.14107131958007812,
+            0.2683795988559723,
+            0.7942384481430054,
+            0.8547537922859192
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_109.jpg",
+      "latency_ms": 193.17,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.508061408996582,
+          "bbox": [
+            0.185961052775383,
+            0.2181299477815628,
+            0.7969255447387695,
+            0.7887575030326843
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_67.jpg",
+      "latency_ms": 159.6,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.5953942537307739,
+          "bbox": [
+            0.07083459198474884,
+            0.28784823417663574,
+            0.7535260915756226,
+            0.8750254511833191
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_115.jpg",
+      "latency_ms": 159.46,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.6278981566429138,
+          "bbox": [
+            0.16465845704078674,
+            0.20711632072925568,
+            0.7805014848709106,
+            0.791638195514679
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_101.jpg",
+      "latency_ms": 158.06,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.5603854060173035,
+          "bbox": [
+            0.12357451766729355,
+            0.21684858202934265,
+            0.793441891670227,
+            0.8172066807746887
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_119.jpg",
+      "latency_ms": 154.02,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.6428203582763672,
+          "bbox": [
+            0.15212006866931915,
+            0.21725603938102722,
+            0.7780870199203491,
+            0.8034237623214722
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_125.jpg",
+      "latency_ms": 150.92,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.531516432762146,
+          "bbox": [
+            0.16309566795825958,
+            0.24039840698242188,
+            0.7784887552261353,
+            0.802338719367981
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_124.jpg",
+      "latency_ms": 153.3,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.47346940636634827,
+          "bbox": [
+            0.1573466956615448,
+            0.24291996657848358,
+            0.7787351608276367,
+            0.8049414753913879
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_159.jpg",
+      "latency_ms": 156.2,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.641456127166748,
+          "bbox": [
+            0.18821850419044495,
+            0.2069070190191269,
+            0.759081244468689,
+            0.7515996098518372
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_129.jpg",
+      "latency_ms": 153.01,
+      "detections": [
+        {
+          "label": "Tiger",
+          "score": 0.5779280662536621,
+          "bbox": [
+            0.15632247924804688,
+            0.2288362681865692,
+            0.7706279754638672,
+            0.8104368448257446
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_182.jpg",
+      "latency_ms": 148.79,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.6598021388053894,
+          "bbox": [
+            0.25789347290992737,
+            0.2386995106935501,
+            0.7870715856552124,
+            0.7909150719642639
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_133.jpg",
+      "latency_ms": 144.94,
+      "detections": [
+        {
+          "label": "Tiger",
+          "score": 0.5642600059509277,
+          "bbox": [
+            0.12065897136926651,
+            0.21865543723106384,
+            0.7564684748649597,
+            0.8094855546951294
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_196.jpg",
+      "latency_ms": 142.77,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.7209678292274475,
+          "bbox": [
+            0.24789905548095703,
+            0.29680803418159485,
+            0.7799803018569946,
+            0.83460932970047
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_138.jpg",
+      "latency_ms": 145.67,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.5542643070220947,
+          "bbox": [
+            0.13165374100208282,
+            0.22246551513671875,
+            0.7575302720069885,
+            0.7953519821166992
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_235.jpg",
+      "latency_ms": 181.24,
+      "detections": [
+        {
+          "label": "Tiger",
+          "score": 0.6007921099662781,
+          "bbox": [
+            0.1827993392944336,
+            0.25454238057136536,
+            0.6914339065551758,
+            0.7727861404418945
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_142.jpg",
+      "latency_ms": 146.7,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.5754776000976562,
+          "bbox": [
+            0.1711874008178711,
+            0.22050823271274567,
+            0.7644060850143433,
+            0.7745809555053711
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_251.jpg",
+      "latency_ms": 156.24,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.65228271484375,
+          "bbox": [
+            0.2585388720035553,
+            0.2274000346660614,
+            0.7288642525672913,
+            0.7265316247940063
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_147.jpg",
+      "latency_ms": 150.06,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.6961451768875122,
+          "bbox": [
+            0.16456730663776398,
+            0.2060094177722931,
+            0.7564004063606262,
+            0.7735500931739807
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "val/images/Frame_259.jpg",
+      "latency_ms": 148.84,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.5809820294380188,
+          "bbox": [
+            0.21761126816272736,
+            0.22296036779880524,
+            0.7179973125457764,
+            0.7337466478347778
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_151.jpg",
+      "latency_ms": 153.11,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.6893903613090515,
+          "bbox": [
+            0.15333779156208038,
+            0.20040418207645416,
+            0.7503913044929504,
+            0.772747278213501
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_156.jpg",
+      "latency_ms": 213.09,
+      "detections": [
+        {
+          "label": "Tiger",
+          "score": 0.6452279686927795,
+          "bbox": [
+            0.1458522379398346,
+            0.20973701775074005,
+            0.7546281218528748,
+            0.767731249332428
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_161.jpg",
+      "latency_ms": 179.58,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.6640235185623169,
+          "bbox": [
+            0.19738388061523438,
+            0.1974797546863556,
+            0.7587354779243469,
+            0.7452234625816345
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    },
+    {
+      "source_path": "train/images/Frame_165.jpg",
+      "latency_ms": 161.73,
+      "detections": [
+        {
+          "label": "Leopard",
+          "score": 0.674163818359375,
+          "bbox": [
+            0.16029414534568787,
+            0.18444374203681946,
+            0.7609480023384094,
+            0.7383143901824951
+          ],
+          "image_width": 1280,
+          "image_height": 720
+        }
+      ]
+    }
+  ]
+}

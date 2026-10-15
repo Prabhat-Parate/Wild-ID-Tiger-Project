@@ -1,0 +1,39 @@
+{
+  "inspection_preceded_editing": true,
+  "frameworks": [
+    "React 19",
+    "TypeScript",
+    "Vite 7",
+    "React Router 7",
+    "Tailwind 4/custom CSS",
+    "FastAPI"
+  ],
+  "method": "image retrieval",
+  "descriptor": "Spatial gradient histogram v1 (untrained)",
+  "dimensions": 512,
+  "score": "cosine similarity; no identity probability",
+  "source": "https://huggingface.co/datasets/Ultralytics/Tiger-pose",
+  "pinned_commit": "81e28ddc5ce42e30671a261e0aa9b20fec81b065",
+  "source_train_images": 100,
+  "source_val_images": 53,
+  "card_claim_train_images": 210,
+  "included_record_count": 32,
+  "retained_original_jpegs": 32,
+  "preview_files": 32,
+  "crop_files": 32,
+  "records_with_individual_identity": 0,
+  "api_paths": [
+    "/api/analyze",
+    "/api/dataset",
+    "/api/evaluation-report",
+    "/api/evaluations",
+    "/api/health",
+    "/api/individuals",
+    "/api/media/{filename}",
+    "/api/reviews",
+    "/api/sightings"
+  ],
+  "new_runtime_dependencies": [],
+  "original_code_licence": "pending team approval",
+  "dataset_licence": "repository-stated AGPL-3.0; review redistribution/provenance before publication"
+}
