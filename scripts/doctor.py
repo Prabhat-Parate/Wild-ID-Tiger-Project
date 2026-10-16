@@ -30,6 +30,18 @@ def main():
         ok &= check("UTF-8 registry read", False, "Save JSON as UTF-8")
     manifest = ROOT / "models" / "tiger-open-vocabulary" / "manifest.json"
     model = ROOT / "models" / "tiger-open-vocabulary" / "model.onnx"
+    labels = ROOT / "models" / "species-classifier" / "speciesnet.labels.txt"
+    if labels.is_file():
+        digest = hashlib.sha256(labels.read_bytes()).hexdigest()
+        ok &= check(
+            "speciesnet labels hash",
+            digest == "e0c41415d9b29dfd6d2e2494205d1197d28595cc6f69cb129495f9827155547e",
+            "Run python scripts/setup_species_model.py",
+        )
+    else:
+        ok &= check("speciesnet labels", False, "Run python scripts/setup_species_model.py")
+    clf = ROOT / "models" / "species-classifier" / "model.onnx"
+    print(("OK  " if clf.is_file() else "INFO") + " classifier weights " + ("present" if clf.is_file() else "absent (naming disabled)"))
     if manifest.is_file() and model.is_file():
         info = json.loads(manifest.read_text(encoding="utf-8"))
         digest = hashlib.sha256(model.read_bytes()).hexdigest()

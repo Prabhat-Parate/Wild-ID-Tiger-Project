@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Concurrent camera clients plus malformed burst. Reports measured numbers only."""
 from __future__ import annotations
-import argparse, asyncio, io, json, os, statistics, time
+import argparse, asyncio, io, json, os, statistics, time, resource
 from pathlib import Path
 
 import httpx
@@ -84,6 +84,7 @@ async def main():
         "health_after_burst_ms": [round(x, 2) for x in after],
         "ready": ready,
         "pass_health_fast": bool(health_ms) and statistics.median(health_ms) < 500,
+        "rss_kb_end": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
         "allowed_error_codes_only": all(
             c in {0, 200, 413, 415, 422, 429, 503, 504} for c in codes
         ),

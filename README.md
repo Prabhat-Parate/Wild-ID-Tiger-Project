@@ -43,6 +43,7 @@ Windows (PowerShell; `.sh` launchers do not run):
 $env:PYTHONUTF8 = "1"
 python scripts/doctor.py
 python scripts/setup_detector.py   # operator only, not at runtime
+python scripts/setup_species_model.py  # SpeciesNet labels; weights must be supplied as ONNX
 .\scripts\start-backend.ps1
 # second terminal:
 .\scripts\start-frontend.ps1

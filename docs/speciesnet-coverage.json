@@ -1,0 +1,304 @@
+{
+  "synonyms": {
+    "muntiacus muntjak": [
+      "muntiacus vaginalis"
+    ],
+    "muntiacus vaginalis": [
+      "muntiacus muntjak"
+    ],
+    "urva edwardsii": [
+      "herpestes edwardsii"
+    ],
+    "herpestes edwardsii": [
+      "urva edwardsii"
+    ],
+    "urva smithii": [
+      "herpestes smithii"
+    ],
+    "herpestes smithii": [
+      "urva smithii"
+    ],
+    "icthyophaga ichthyaetus": [
+      "haliaeetus ichthyaetus"
+    ],
+    "haliaeetus ichthyaetus": [
+      "icthyophaga ichthyaetus"
+    ],
+    "antigone antigone": [
+      "grus antigone"
+    ]
+  },
+  "n_labels": 2498,
+  "rows": [
+    {
+      "common": "Tiger",
+      "scientific": "Panthera tigris",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "tiger",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Indian leopard",
+      "scientific": "Panthera pardus",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "leopard",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Sloth bear",
+      "scientific": "Melursus ursinus",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "sloth bear",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Gaur",
+      "scientific": "Bos gaurus",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "gaur",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Nilgai",
+      "scientific": "Boselaphus tragocamelus",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "nilgai",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Dhole",
+      "scientific": "Cuon alpinus",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "dhole",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Small Indian civet",
+      "scientific": "Viverricula indica",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "small indian civet",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Jungle cat",
+      "scientific": "Felis chaus",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "jungle cat",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Sambar",
+      "scientific": "Rusa unicolor",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "sambar",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Barking deer",
+      "scientific": "Muntiacus muntjak",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "southern red muntjac",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Chital",
+      "scientific": "Axis axis",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "chital",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Chausingha",
+      "scientific": "Tetracerus quadricornis",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "four-horned antelope",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Honey badger",
+      "scientific": "Mellivora capensis",
+      "tier": "A",
+      "level": "species",
+      "rank": "species",
+      "matched": "honey badger",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Sarus crane",
+      "scientific": "Antigone antigone",
+      "tier": "A",
+      "level": "genus",
+      "rank": "genus",
+      "matched": "Antigone species",
+      "flag": "Higher rank only (genus) in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Grey-headed fish eagle",
+      "scientific": "Icthyophaga ichthyaetus",
+      "tier": "A",
+      "level": "absent",
+      "rank": "undetermined",
+      "matched": null,
+      "flag": "Not supported"
+    },
+    {
+      "common": "Wild boar",
+      "scientific": "Sus scrofa",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "wild boar",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Indian porcupine",
+      "scientific": "Hystrix indica",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "indian crested porcupine",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Rhesus macaque",
+      "scientific": "Macaca mulatta",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "rhesus monkey",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Northern plains grey langur",
+      "scientific": "Semnopithecus entellus",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "northern plains gray langur",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Striped hyena",
+      "scientific": "Hyaena hyaena",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "striped hyaena",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Ruddy mongoose",
+      "scientific": "Urva smithii",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "ruddy mongoose",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Indian grey mongoose",
+      "scientific": "Urva edwardsii",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "indian grey mongoose",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Indian hare",
+      "scientific": "Lepus nigricollis",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "indian hare",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Indian pangolin",
+      "scientific": "Manis crassicaudata",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "indian pangolin",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Marsh crocodile",
+      "scientific": "Crocodylus palustris",
+      "tier": "B",
+      "level": "genus",
+      "rank": "genus",
+      "matched": "Crocodylus species",
+      "flag": "Higher rank only (genus) in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Indian rock python",
+      "scientific": "Python molurus",
+      "tier": "B",
+      "level": "absent",
+      "rank": "undetermined",
+      "matched": null,
+      "flag": "Not supported"
+    },
+    {
+      "common": "Indian cobra",
+      "scientific": "Naja naja",
+      "tier": "B",
+      "level": "absent",
+      "rank": "undetermined",
+      "matched": null,
+      "flag": "Not supported"
+    },
+    {
+      "common": "Bengal monitor",
+      "scientific": "Varanus bengalensis",
+      "tier": "B",
+      "level": "genus",
+      "rank": "genus",
+      "matched": "Varanus species",
+      "flag": "Higher rank only (genus) in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Indian peafowl",
+      "scientific": "Pavo cristatus",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "indian peafowl",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    },
+    {
+      "common": "Red junglefowl",
+      "scientific": "Gallus gallus",
+      "tier": "B",
+      "level": "species",
+      "rank": "species",
+      "matched": "red junglefowl",
+      "flag": "Supported at species level in classifier vocabulary (weights not loaded)"
+    }
+  ]
+}

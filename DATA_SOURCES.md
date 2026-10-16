@@ -24,3 +24,13 @@ Rare species (e.g. Indian pangolin) have **no site-specific location notes**.
 Realistic camera detection in this app covers larger vertebrates. Birds, reptiles, amphibians, fish, and insects may be listed without being named by the detector.
 
 The detector vocabulary is **not** this list. It is read from the loaded model manifest at runtime (`/api/health` `detector_labels`, `/api/species` `detector_labels`).
+
+## SpeciesNet label space (Apache-2.0)
+
+File `models/species-classifier/speciesnet.labels.txt` from [google/cameratrapai](https://github.com/google/cameratrapai) (2498 labels). **Weights were not downloaded.** Support flags in `/api/species` are computed by scientific-name match against this file (`backend/taxonomy.py`), not typed by hand.
+
+Documented synonyms: `Muntiacus muntjak`/`Muntiacus vaginalis`; `Urva edwardsii`/`Herpestes edwardsii`; `Urva smithii`/`Herpestes smithii`; `Icthyophaga ichthyaetus`/`Haliaeetus ichthyaetus`.
+
+Coverage vs this label file is in `docs/speciesnet-coverage.json`. That is **vocabulary coverage**, not accuracy on Tadoba images.
+
+No labelled evaluation set was collected (Kaggle/LILA/iNaturalist hosts are not available here). `scripts/evaluate_species.py` records that fact.

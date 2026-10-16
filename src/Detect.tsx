@@ -752,10 +752,12 @@ export function Detect({
                   {d.label === "Person"
                     ? "Person detected, ignored"
                     : d.species_status === "named"
-                      ? d.display_label || d.label
-                      : d.species_status === "not_on_reference_list"
-                        ? `${d.display_label || d.label} (Not on the Tadoba reference list)`
-                        : "Animal (species not determined)"}
+                      ? `${d.display_label || d.label}${d.scientific_name ? `, ${d.scientific_name}` : ""}${d.rank ? `, ${d.rank}` : ""}`
+                      : d.species_status === "higher_rank_only"
+                        ? `${d.display_label || "Higher rank only"}`
+                        : d.species_status === "not_on_reference_list"
+                          ? `${d.display_label || d.label} (Not on the Tadoba reference list)`
+                          : "Animal (species not determined)"}
                   {d.species_status !== "named" && d.label !== "Person" && (
                     <small>
                       Raw model label: {d.label} (not verified species)
@@ -832,6 +834,14 @@ export function Detect({
         model labels.
       </p>
       <section className="detector-scope">
+        {!health?.classifier_loaded && (
+          <p>
+            Species naming unavailable, showing animal boxes only. Classifier
+            weights are not loaded. Run python scripts/setup_species_model.py
+            when an ONNX export is available. Live frames are not silently
+            classified.
+          </p>
+        )}
         <h2>Detector scope & limitations</h2>
         <p>
           {health?.detector_scope ||

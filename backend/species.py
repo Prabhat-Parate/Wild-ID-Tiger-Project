@@ -23,13 +23,13 @@ def load_registry(path: Path = REGISTRY_PATH) -> dict:
     return data
 
 
-def annotate_species(label: str, registry: dict | None, detector_labels: list[str]) -> dict:
+def annotate_species(label: str, registry: dict | None, detector_labels: list[str], classifier_match=None) -> dict:
     """Map a detector label to species_status without guessing."""
     labels = set(detector_labels or [])
     if label not in labels and label != "Person":
         return {
             "label": "Animal",
-            "display_label": "Animal detected (species not determined)",
+            "display_label": "Animal (species not determined)",
             "species_status": "undetermined",
             "ignored": False,
         }
@@ -48,11 +48,12 @@ def annotate_species(label: str, registry: dict | None, detector_labels: list[st
             "display_label": match["common_name"],
             "species_status": "named",
             "ignored": False,
+            "scientific_name": match.get("scientific_name"),
         }
     if label in GENERIC_LABELS:
         return {
             "label": label,
-            "display_label": "Animal detected (species not determined)",
+            "display_label": "Animal (species not determined)",
             "species_status": "undetermined",
             "ignored": False,
         }
@@ -64,16 +65,23 @@ def annotate_species(label: str, registry: dict | None, detector_labels: list[st
     }
 
 
-def registry_with_support(registry: dict, detector_labels: list[str]) -> dict:
-    labels = set(detector_labels or [])
+annotate_detection = annotate_species
+
+
+def registry_with_support(registry: dict, detector_labels: list[str], classifier_vocab=None, classifier_loaded: bool=False) -> dict:
+    from backend.taxonomy import match_scientific, support_flag
     species = []
+    vocab = classifier_vocab
     for s in registry.get("species") or []:
         item = dict(s)
-        supported = bool(item.get("detector_label") and item["detector_label"] in labels)
-        item["detector_supported"] = supported
-        item["support_flag"] = (
-            "Supported" if supported else "Not supported by current detector"
-        )
+        det = bool(item.get("detector_label") and item["detector_label"] in set(detector_labels or []))
+        item["detector_supported"] = det
+        match = match_scientific(item.get("scientific_name") or "", vocab or [])
+        item["classifier_match"] = match
+        if vocab:
+            item["support_flag"] = support_flag(match, classifier_loaded)
+        else:
+            item["support_flag"] = "Supported at species level" if det else "Not supported by current detector"
         species.append(item)
     extra = []
     mapped = {s.get("detector_label") for s in species if s.get("detector_label")}
@@ -101,4 +109,6 @@ def registry_with_support(registry: dict, detector_labels: list[str]) -> dict:
         "species": species,
         "detector_only_labels": extra,
         "detector_labels": list(detector_labels or []),
+        "classifier_loaded": classifier_loaded,
+        "classifier_label_count": len(vocab or []),
     }

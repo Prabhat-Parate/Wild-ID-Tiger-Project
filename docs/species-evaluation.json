@@ -1,0 +1,10 @@
+{
+  "sentence": "No labelled evaluation has been run for these species.",
+  "reason": "No openly licensed, per-image-attributed Tadoba or central-Indian camera-trap set was downloaded in this environment. Host allow-list excludes Kaggle, LILA, and iNaturalist. Forest Department data was not used.",
+  "minimum_n": 20,
+  "split": null,
+  "seed": null,
+  "species": {},
+  "negatives": {},
+  "script": "scripts/evaluate_species.py"
+}

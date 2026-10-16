@@ -29,6 +29,11 @@ export interface Health {
   detector_score_cutoff: number | null;
   detector_scope: string;
   detector_setup: string;
+  classifier_loaded?: boolean;
+  classifier_name?: string | null;
+  classifier_version?: string | null;
+  classifier_labels?: number;
+  classifier_setup?: string;
 
   status: string;
   model_loaded: boolean;
@@ -136,7 +141,16 @@ export class ApiError extends Error {
 export interface FrameDetection {
   label: string;
   display_label?: string | null;
-  species_status?: "named" | "undetermined" | "not_on_reference_list";
+  species_status?:
+    | "named"
+    | "undetermined"
+    | "not_on_reference_list"
+    | "higher_rank_only";
+  rank?: string | null;
+  scientific_name?: string | null;
+  localizer_score?: number | null;
+  classifier_score?: number | null;
+  top_k?: { label: string; scientific_name?: string | null; rank?: string; score: number }[] | null;
   score: number;
   bbox: [number, number, number, number];
   image_width: number;

@@ -16,7 +16,8 @@ Frontend review records have review_scope='visual_similarity_only',candidate/gro
 Limits retained:8MiB file/9MiB complete request,24million pixels,max side10000;JPEG/PNG extension+MIME+magic+decoder checks;metadata-free RGB upload processing;multipart spool threshold above request cap;25s soft server/28s client timeout;12 analyses/minute/peer. Structured route/status/duration logs only. Peer hashes are salted,in-memory,one-minute-window,lazily expired. Shared dev proxy means shared rate-limit bucket. Production FastAPI serves built dist SPA/API same origin and sets CSP/NoSniff/NoReferrer. Unknown API paths404;no source files or coordinates exposed.
 
 - **GET /api/ready**: liveness of model/dataset, `in_flight`, `rejected`, queue capacity. Use for readiness; **GET /api/health** stays cheap during inference saturation.
-- **GET /api/species**: Tadoba reference registry plus `detector_supported` flags derived from the loaded model labels. Detector-only labels not on the list are listed separately.
+- **GET /api/species**: Tadoba reference registry plus support flags computed from detector labels and, when present, the SpeciesNet label file via scientific-name matching. `classifier_loaded` is false without hashed ONNX weights.
+- **GET /api/health** includes `classifier_loaded`, `classifier_name`, `classifier_version`, `classifier_labels`.
 
 PORT environment is respected by start-backend.sh and start-backend.ps1 (default 8000). Vite development proxy reads the same PORT. Separate deployment configuration and security-header responsibilities are documented in README;actual external URLs were not supplied or verified.
 

@@ -25,18 +25,30 @@ class Health(BaseModel):
     detector_score_cutoff:float|None=None
     detector_scope:str='Open-vocabulary configured prompts; not validated on Tadoba or field camera-trap footage. Not a deployment.'
     detector_setup:str='Install requirements, run python scripts/setup_detector.py, then restart the backend. No runtime downloads.'
+    classifier_loaded:bool=False
+    classifier_name:str|None=None
+    classifier_version:str|None=None
+    classifier_labels:int=0
+    classifier_setup:str='Operator: python scripts/setup_species_model.py. Weights are not downloaded at runtime. WILDID_CLASSIFIER=none disables stage 2.'
 
     status:str;model_loaded:bool;model:str;method:str;version:str;dataset:DatasetStatus;threshold:float|None;calibration:str|None
 class FrameDetection(BaseModel):
     label:str
     display_label:str|None=None
     species_status:str='named'
+    rank:str|None=None
+    scientific_name:str|None=None
     score:float=Field(ge=0,le=1)
+    localizer_score:float|None=None
+    classifier_score:float|None=None
+    top_k:list|None=None
     bbox:list[float]
     image_width:int=Field(gt=0)
     image_height:int=Field(gt=0)
     model_name:str|None=None
     model_version:str|None=None
+    classifier_name:str|None=None
+    classifier_version:str|None=None
     @model_validator(mode='after')
     def valid_box(self):
         b=self.bbox
@@ -51,6 +63,10 @@ class DetectionResponse(BaseModel):
     request_id:str
     score_cutoff:float
     cutoff_basis:str='configurable heuristic, not validated'
+    classifier:str|None=None
+    classifier_version:str|None=None
+    stage_latency:dict|None=None
+    classify_mode:str='boxes_only_when_classifier_unavailable'
 class DatasetInformation(BaseModel):
     name:str
     source_url:str

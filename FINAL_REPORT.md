@@ -1,3 +1,7 @@
+## 0b. Two-stage classifier (same day)
+
+SpeciesNet **labels** (Apache-2.0, 2498 classes) are in-tree. **Weights are not.** MegaDetector and BioCLIP were not downloaded. Naming of chital/sambar/sloth bear is **not** performed at runtime. Coverage table: `docs/speciesnet-coverage.json`. Evaluation: none. Load test was not re-run with both weights (neither ONNX is in this sandbox).
+
 ## 0. 2026-10-16 multi-species and backend bounds
 
 Inspected in this checkout: React/TypeScript/Vite/FastAPI; `/api/detect` and `/api/analyze` as in `backend/main.py`; detector `OnnxWorldDetector` in `backend/detection.py`; labels from `models/tiger-open-vocabulary/manifest.json`: Tiger, Lion, Leopard, Cat, Dog, Person, Animal. Rate limits: detect 120/min and 2/s per hashed peer; analyze 12/min. Unbounded before this change: in-memory `buckets`/`detect_buckets` dictionaries. ONNX CPU. Windows: PowerShell launchers added; UTF-8 reads.

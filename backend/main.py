@@ -12,6 +12,8 @@ from backend.retrieval import describe, MODEL, METHOD
 from backend.schemas import Analysis, Health, Dataset, DetectionResponse
 from backend.detection import load_detector, box_iou
 from backend.species import load_registry, annotate_species, registry_with_support
+from backend.classifier import load_classifier
+from backend.pipeline import run_pipeline
 
 ROOT=Path(__file__).resolve().parents[1]; DATA=ROOT/'data/tiger-subset'
 MAX_BYTES=int(os.getenv('MAX_UPLOAD_BYTES','8388608')); MAX_PIXELS=24_000_000
@@ -49,6 +51,7 @@ try:
 except Exception:
     species_registry={'species':[],'disclaimer':'Registry failed to load'}
 detector=load_detector()
+classifier,classifier_vocab_holder=load_classifier()
 detector_lock=threading.BoundedSemaphore(INFERENCE_SLOTS)
 inflight=0;rejected=0;inflight_lock=threading.Lock()
 DETECT_TIMEOUT=min(20,max(1,float(os.getenv('DETECTION_TIMEOUT_SECONDS','8'))))
@@ -105,7 +108,7 @@ async def security(request: Request, call_next):
 
 @app.get('/api/health',response_model=Health)
 def health():
-    return {'status':'ok' if manifest else 'dataset_missing','model_loaded':False,'model':MODEL,'method':METHOD,'version':'0.2.0','dataset':{'commit':manifest['commit'] if manifest else None,'records':len(records),'images':len({r['image_uuid'] for r in records}),'individuals':len({r['individual_id'] for r in records if r['individual_id']}),'reference_records':sum(r['split']=='demo' and r['role']=='reference' for r in records)},'threshold':report['threshold'] if report else None,'calibration':report['calibration'] if report else None,'detector_loaded':detector is not None,'detector_name':detector.name if detector else None,'detector_version':detector.version if detector else None,'detector_labels':detector.labels if detector else [],'detector_score_cutoff':detector.cutoff if detector else None}
+    return {'status':'ok' if manifest else 'dataset_missing','model_loaded':False,'model':MODEL,'method':METHOD,'version':'0.2.0','dataset':{'commit':manifest['commit'] if manifest else None,'records':len(records),'images':len({r['image_uuid'] for r in records}),'individuals':len({r['individual_id'] for r in records if r['individual_id']}),'reference_records':sum(r['split']=='demo' and r['role']=='reference' for r in records)},'threshold':report['threshold'] if report else None,'calibration':report['calibration'] if report else None,'detector_loaded':detector is not None,'detector_name':detector.name if detector else None,'detector_version':detector.version if detector else None,'detector_labels':detector.labels if detector else [],'detector_score_cutoff':detector.cutoff if detector else None,'classifier_loaded':classifier is not None,'classifier_name':classifier.name if classifier else (classifier_vocab_holder.name if classifier_vocab_holder else None),'classifier_version':classifier.version if classifier else None,'classifier_labels':len(getattr(classifier or classifier_vocab_holder,'labels',[]) or [])}
 
 @app.get('/api/ready')
 def ready():
@@ -119,12 +122,15 @@ def ready():
         'in_flight':current,
         'rejected':rej,
         'inference_workers':INFERENCE_WORKERS,
+        'classifier_loaded':classifier is not None,
+        'localizer_ms_last':None,
     }
 
 @app.get('/api/species')
 def species():
     labels=detector.labels if detector else []
-    return registry_with_support(species_registry, labels)
+    vocab=getattr(classifier or classifier_vocab_holder,'vocabulary',None)
+    return registry_with_support(species_registry, labels, vocab, classifier is not None)
 @app.get('/api/dataset',response_model=Dataset)
 def dataset():
     if not manifest: raise HTTPException(503,'Run python scripts/load_dataset.py')
@@ -196,7 +202,7 @@ async def detect_image(image):
         inflight+=1
     def work():
         global inflight
-        try:return detector.detect(image)
+        try:return run_pipeline(image,detector,classifier,species_registry)
         finally:
             detector_lock.release()
             with inflight_lock:
@@ -217,14 +223,13 @@ async def detect(request:Request,file:UploadFile=File(...)):
         if len(form.getlist('file'))!=1 or any(hasattr(v,'filename') and k!='file' for k,v in form.multi_items()):raise HTTPException(422,'Supply exactly one frame in the file field')
         raw=await file.read(MAX_BYTES+1)
         image=await run_in_threadpool(validate_image,raw,file.filename or '',file.content_type or '')
-        found=await detect_image(image)
-        labels=detector.labels if detector else []
+        found,timings=await detect_image(image)
         named=[]
         for d in found:
-            meta=annotate_species(d['label'],species_registry,labels)
-            d={**d,**meta,'model_name':detector.name,'model_version':detector.version}
+            d={**d,'model_name':detector.name,'model_version':detector.version,'score':d.get('localizer_score',d.get('score',0))}
             named.append(d)
-        return {'detections':named,'detector':detector.name,'detector_version':detector.version,'timestamp':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'latency_ms':round((time.perf_counter()-start)*1000,2),'request_id':str(uuid.uuid4()),'score_cutoff':detector.cutoff}
+        mode='two_stage' if classifier is not None else 'localizer_only'
+        return {'detections':named,'detector':detector.name,'detector_version':detector.version,'timestamp':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'latency_ms':round((time.perf_counter()-start)*1000,2),'request_id':str(uuid.uuid4()),'score_cutoff':detector.cutoff,'classifier':classifier.name if classifier else None,'classifier_version':classifier.version if classifier else None,'stage_latency':timings,'classify_mode':mode}
     finally:await file.close()
 
 @app.post('/api/analyze',response_model=Analysis)
@@ -241,7 +246,7 @@ async def analyze(record_id:str|None=Form(None),file:UploadFile|None=File(None),
         image=await run_in_threadpool(validate_image,raw,file.filename or '',file.content_type or '')
         evidence=None
         if detect_first or detection_box:
-            detections=await detect_image(image)
+            detections,timings=await detect_image(image)
             if any(d['label']=='Person' for d in detections):raise HTTPException(422,'Person detected, ignored. This frame cannot be forwarded for similarity; choose a person-free frame.')
             eligible=[d for d in detections if d['label']!='Person']
             if not eligible:raise HTTPException(422,'No animal detection available for a crop. Full-frame comparison remains a separate explicit option.')

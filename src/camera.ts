@@ -1,6 +1,6 @@
 import { ApiError, type FrameDetection } from "./api";
 export const DETECTOR_SCORE_NOTE =
-  "Detector score is not a probability and not a measure of accuracy. Detection does not identify individual animals.";
+  "Scores are not probabilities. Detection does not identify individual animals.";
 export const STALE_MS = 1200;
 export function cameraError(error: unknown) {
   const name =
