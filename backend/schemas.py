@@ -23,16 +23,20 @@ class Health(BaseModel):
     detector_version:str|None=None
     detector_labels:list[str]=[]
     detector_score_cutoff:float|None=None
-    detector_scope:str='Open-vocabulary configured prompts; not validated on field camera-trap footage of tigers.'
+    detector_scope:str='Open-vocabulary configured prompts; not validated on Tadoba or field camera-trap footage. Not a deployment.'
     detector_setup:str='Install requirements, run python scripts/setup_detector.py, then restart the backend. No runtime downloads.'
 
     status:str;model_loaded:bool;model:str;method:str;version:str;dataset:DatasetStatus;threshold:float|None;calibration:str|None
 class FrameDetection(BaseModel):
     label:str
+    display_label:str|None=None
+    species_status:str='named'
     score:float=Field(ge=0,le=1)
     bbox:list[float]
     image_width:int=Field(gt=0)
     image_height:int=Field(gt=0)
+    model_name:str|None=None
+    model_version:str|None=None
     @model_validator(mode='after')
     def valid_box(self):
         b=self.bbox

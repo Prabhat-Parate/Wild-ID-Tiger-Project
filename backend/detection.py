@@ -7,6 +7,13 @@ import numpy as np
 from PIL import Image
 
 ROOT=Path(__file__).resolve().parents[1]
+os.environ.setdefault('OMP_NUM_THREADS', os.getenv('ONNX_INTRA_OP_THREADS','2'))
+os.environ.setdefault('OPENBLAS_NUM_THREADS','1')
+try:
+    import numpy as _np
+    _np.seterr(all='ignore')
+except Exception:
+    pass
 class Detector(Protocol):
     name:str
     version:str
@@ -18,7 +25,7 @@ class OnnxWorldDetector:
     name='YOLOv8s-World v2 (ONNX, configured prompts)'
     def __init__(self,directory:Path):
         import onnxruntime as ort
-        info=json.loads((directory/'manifest.json').read_text())
+        info=json.loads((directory/'manifest.json').read_text(encoding='utf-8'))
         for name,digest in info['sha256'].items():
             if hashlib.sha256((directory/name).read_bytes()).hexdigest()!=digest:raise ValueError('Detector artifact integrity check failed')
         self.version=info['model_commit'];self.labels=info['labels']
@@ -26,9 +33,15 @@ class OnnxWorldDetector:
         if not 0<self.cutoff<1:raise ValueError('DETECTION_SCORE_CUTOFF must be between zero and one')
         self.features=np.load(directory/'text_features.npy',allow_pickle=False)
         if self.features.shape!=(1,len(self.labels),512) or not np.isfinite(self.features).all():raise ValueError('Invalid text features')
-        options=ort.SessionOptions();options.intra_op_num_threads=2;options.inter_op_num_threads=1
+        intra=max(1,int(os.getenv('ONNX_INTRA_OP_THREADS','2')));inter=max(1,int(os.getenv('ONNX_INTER_OP_THREADS','1')))
+        options=ort.SessionOptions();options.intra_op_num_threads=intra;options.inter_op_num_threads=inter
         self.session=ort.InferenceSession(str(directory/'model.onnx'),sess_options=options,providers=['CPUExecutionProvider'])
     def detect(self,image:Image.Image)->list[dict]:
+        orig_w,orig_h=image.size
+        max_side=max(320,int(os.getenv('DETECTION_MAX_SIDE','1280')))
+        if max(orig_w,orig_h)>max_side:
+            s=max_side/max(orig_w,orig_h)
+            image=image.resize((max(1,round(orig_w*s)),max(1,round(orig_h*s))),Image.Resampling.BILINEAR)
         w,h=image.size;scale=min(640/w,640/h);nw,nh=round(w*scale),round(h*scale);left,top=(640-nw)//2,(640-nh)//2
         padded=Image.new('RGB',(640,640),(114,114,114));padded.paste(image.resize((nw,nh),Image.Resampling.BILINEAR),(left,top))
         tensor=np.asarray(padded,dtype=np.float32).transpose(2,0,1)[None]/255.0
@@ -45,7 +58,7 @@ class OnnxWorldDetector:
             label=self.labels[int(classes[i])]
             # Competing animal prompts share NMS; a reported person is never suppressed by an animal.
             if any((label=='Person')==(d['label']=='Person') and box_iou(box,d['bbox'])>0.45 for d in results):continue
-            results.append({'label':label,'score':float(best[i]),'bbox':box,'image_width':w,'image_height':h})
+            results.append({'label':label,'score':float(best[i]),'bbox':box,'image_width':orig_w,'image_height':orig_h})
             if len(results)>=20:break
         return results
 

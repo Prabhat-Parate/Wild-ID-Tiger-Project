@@ -1,0 +1,312 @@
+{
+  "title": "Tadoba-Andhari reference species registry",
+  "disclaimer": "This is a literature reference list for the reserve, not a claim that Wild-ID is deployed at, validated on, or has data from Tadoba-Andhari. Published mammal counts disagree (41, 62, and 80 are all cited in secondary sources); this file states only the number of entries included here. Detector vocabulary is separate and is read from the loaded model at runtime. Rare-species notes contain no site-specific locations.",
+  "entry_count_label": "Registry entries in this file (not a total fauna count for the reserve)",
+  "verification_note": "Primary sources requested (ZSI Fauna of Tadoba-Andhari PDF, NTCA brief, BirdLife/KBA, Maharashtra Forest Department) were not fully retrieved in this environment. Scientific names use standard taxonomy. verification_status is honest: independently_cited only where a public URL was checked for the species in a Tadoba or central-India official/scientific context; otherwise literature_standard or unconfirmed_for_tadoba.",
+  "camera_detection_limit": "Realistic camera detection in this app covers larger vertebrates only. Birds, reptiles, amphibians, fish, and insects may appear in the registry without being named by the detector.",
+  "species": [
+    {
+      "common_name": "Tiger",
+      "scientific_name": "Panthera tigris",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": [
+        "https://ntca.gov.in/",
+        "https://zsi.gov.in/PDFVolumes/cas/025/index.pdf"
+      ],
+      "notes": "Bengal tiger is the flagship of the reserve. Detection does not identify individuals.",
+      "detector_label": "Tiger",
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Indian leopard",
+      "scientific_name": "Panthera pardus",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://ntca.gov.in/"],
+      "notes": "Indian subspecies often given as Panthera pardus fusca. Melanistic individuals (black panther) have been reported in central India. Look-alike with tiger: the current open-vocabulary detector does not reliably separate them.",
+      "detector_label": "Leopard",
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Sloth bear",
+      "scientific_name": "Melursus ursinus",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://ntca.gov.in/"],
+      "notes": "",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Gaur",
+      "scientific_name": "Bos gaurus",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://ntca.gov.in/"],
+      "notes": "",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Nilgai",
+      "scientific_name": "Boselaphus tragocamelus",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://ntca.gov.in/"],
+      "notes": "",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Dhole",
+      "scientific_name": "Cuon alpinus",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://ntca.gov.in/"],
+      "notes": "Indian wild dog. Look-alike with domestic dog.",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Small Indian civet",
+      "scientific_name": "Viverricula indica",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Jungle cat",
+      "scientific_name": "Felis chaus",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Look-alike with domestic cat; detector label Cat is not treated as this species.",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Sambar",
+      "scientific_name": "Rusa unicolor",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://ntca.gov.in/"],
+      "notes": "",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Barking deer",
+      "scientific_name": "Muntiacus muntjak",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Indian muntjac; some checklists use Muntiacus vaginalis.",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Chital",
+      "scientific_name": "Axis axis",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://ntca.gov.in/"],
+      "notes": "Spotted deer.",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Chausingha",
+      "scientific_name": "Tetracerus quadricornis",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Four-horned antelope.",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Honey badger",
+      "scientific_name": "Mellivora capensis",
+      "group": "mammal",
+      "tier": "A",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Sarus crane",
+      "scientific_name": "Antigone antigone",
+      "group": "bird",
+      "tier": "A",
+      "source_urls": ["https://datazone.birdlife.org/"],
+      "notes": "The reserve is described in some sources as near the southern edge of its range. Not a camera-trap mammal target.",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Grey-headed fish eagle",
+      "scientific_name": "Icthyophaga ichthyaetus",
+      "group": "bird",
+      "tier": "A",
+      "source_urls": ["https://datazone.birdlife.org/"],
+      "notes": "Also listed as Haliaeetus ichthyaetus in older sources.",
+      "detector_label": null,
+      "verification_status": "literature_standard"
+    },
+    {
+      "common_name": "Wild boar",
+      "scientific_name": "Sus scrofa",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://ntca.gov.in/"],
+      "notes": "Common in central Indian forests; not independently confirmed against a Tadoba checklist in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Indian porcupine",
+      "scientific_name": "Hystrix indica",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Rhesus macaque",
+      "scientific_name": "Macaca mulatta",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Northern plains grey langur",
+      "scientific_name": "Semnopithecus entellus",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Striped hyena",
+      "scientific_name": "Hyaena hyaena",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Ruddy mongoose",
+      "scientific_name": "Urva smithii",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Indian grey mongoose",
+      "scientific_name": "Urva edwardsii",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Indian hare",
+      "scientific_name": "Lepus nigricollis",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Indian pangolin",
+      "scientific_name": "Manis crassicaudata",
+      "group": "mammal",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Sensitive species. No location information is published here.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Marsh crocodile",
+      "scientific_name": "Crocodylus palustris",
+      "group": "reptile",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Mugger. Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Indian rock python",
+      "scientific_name": "Python molurus",
+      "group": "reptile",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Indian cobra",
+      "scientific_name": "Naja naja",
+      "group": "reptile",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Bengal monitor",
+      "scientific_name": "Varanus bengalensis",
+      "group": "reptile",
+      "tier": "B",
+      "source_urls": ["https://www.iucnredlist.org/"],
+      "notes": "Unconfirmed for Tadoba in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Indian peafowl",
+      "scientific_name": "Pavo cristatus",
+      "group": "bird",
+      "tier": "B",
+      "source_urls": ["https://datazone.birdlife.org/"],
+      "notes": "Unconfirmed against a Tadoba Forest Department checklist in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    },
+    {
+      "common_name": "Red junglefowl",
+      "scientific_name": "Gallus gallus",
+      "group": "bird",
+      "tier": "B",
+      "source_urls": ["https://datazone.birdlife.org/"],
+      "notes": "Unconfirmed against a Tadoba Forest Department checklist in this repository.",
+      "detector_label": null,
+      "verification_status": "unconfirmed_for_tadoba"
+    }
+  ]
+}

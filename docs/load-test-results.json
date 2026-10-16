@@ -1,0 +1,31 @@
+{
+  "elapsed_s": 4.21,
+  "clients": 6,
+  "status_counts": {
+    "200": 411,
+    "429": 399,
+    "503": 8,
+    "413": 1,
+    "415": 1
+  },
+  "health_ms_median": 3.92,
+  "health_ms_p95": 7.35,
+  "health_after_burst_ms": [
+    4.75,
+    5.15,
+    5.14,
+    5.05,
+    5.06
+  ],
+  "ready": {
+    "ready": true,
+    "detector_loaded": false,
+    "dataset_loaded": true,
+    "queue_capacity": 3,
+    "in_flight": 0,
+    "rejected": 0,
+    "inference_workers": 1
+  },
+  "pass_health_fast": true,
+  "allowed_error_codes_only": true
+}

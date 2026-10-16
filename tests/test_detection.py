@@ -32,6 +32,15 @@ def test_real_detector_empty_and_real_tiger(client):
     assert body['latency_ms']>0 and body['cutoff_basis']=='configurable heuristic, not validated'
     assert all(len(d['bbox'])==4 and 0<=min(d['bbox'])<=max(d['bbox'])<=1 for d in body['detections'])
 
+def test_queue_full_503(client,monkeypatch):
+    class Empty:
+        name='TEST FIXTURE ONLY';version='test';labels=['Animal'];cutoff=.25
+        def detect(self,image):return []
+    monkeypatch.setattr(m,'detector',Empty())
+    lock=threading.BoundedSemaphore(1);assert lock.acquire(blocking=False)
+    monkeypatch.setattr(m,'detector_lock',lock)
+    r=upload(client);assert r.status_code==503;assert r.headers.get('Retry-After')=='1'
+
 def test_unavailable_health_and_503(client,monkeypatch):
     monkeypatch.setattr(m,'detector',None);health=client.get('/api/health').json()
     assert not health['detector_loaded'] and health['detector_labels']==[]
@@ -83,14 +92,14 @@ def test_person_never_forwarded_and_box_validated(client,monkeypatch):
         def detect(self,image):return [{'label':'Person','score':.8,'bbox':[.1,.1,.8,.8],'image_width':image.width,'image_height':image.height}]
     monkeypatch.setattr(m,'detector',PersonFixture());body={'detect_first':'true'}
     response=client.post('/api/analyze',files={'file':('frame.jpg',picture(),'image/jpeg')},data=body);assert response.status_code==422;assert 'Person detected, ignored' in response.text
-    monkeypatch.setattr(m,'detector',REAL)
-    raw=(m.ROOT/'data/source/tiger/originals'/f"{m.records[0]['id']}.jpg").read_bytes()
+    monkeypatch.setattr(m,'detector',EmptyFixture() if REAL is None else REAL)
+    raw=picture() if REAL is None else (m.ROOT/'data/source/tiger/originals'/f"{m.records[0]['id']}.jpg").read_bytes()
     for box in ['not json','[0,0,2,2]','[0.9,0.9,1,1]']:
-        response=client.post('/api/analyze',files={'file':('frame.jpg',raw,'image/jpeg')},data={'detection_box':box});assert response.status_code==422
+        response=client.post('/api/analyze',files={'file':('frame.jpg',raw,'image/jpeg')},data={'detection_box':box,'detect_first':'true'});assert response.status_code==422
 
 def test_busy_timeout_and_inference_failure(client,monkeypatch):
     assert m.detector_lock.acquire(False)
-    try:assert upload(client).status_code==429
+    try:assert upload(client).status_code==503
     finally:m.detector_lock.release()
     class SlowFixture(EmptyFixture):
         def detect(self,image):time.sleep(.08);return []

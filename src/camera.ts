@@ -50,7 +50,11 @@ export function projectBox(
 export function detectionStatus(detections: FrameDetection[]) {
   if (detections.some((d) => d.label === "Person"))
     return "Person detected, ignored";
-  if (detections.some((d) => d.label === "Tiger")) return "Tiger detected";
+  const named = detections.filter(
+    (d) => d.species_status === "named" || d.label === "Tiger",
+  );
+  if (named.length)
+    return named.map((d) => d.display_label || d.label).join(", ") + " detected";
   return detections.length
     ? "Animal detected (species not determined)"
     : "No animal detected in this frame";
@@ -70,13 +74,23 @@ export class SerialFrameLoop {
   start() {
     if (this.running) return;
     this.running = true;
+    if (typeof document !== "undefined")
+      document.addEventListener("visibilitychange", this.onVisibility);
     this.schedule(0);
   }
   stop() {
     this.running = false;
+    if (typeof document !== "undefined")
+      document.removeEventListener("visibilitychange", this.onVisibility);
     clearTimeout(this.timer);
     this.controller?.abort();
   }
+  private onVisibility = () => {
+    if (typeof document !== "undefined" && document.hidden) {
+      this.controller?.abort();
+      clearTimeout(this.timer);
+    } else if (this.running) this.schedule(this.period);
+  };
   private schedule(ms: number) {
     clearTimeout(this.timer);
     if (this.running) this.timer = setTimeout(() => void this.tick(), ms);
@@ -97,7 +111,7 @@ export class SerialFrameLoop {
       if (this.running) {
         this.failures++;
         delay =
-          e instanceof ApiError && e.status === 429
+          e instanceof ApiError && (e.status === 429 || e.status === 503)
             ? Math.max(2000, e.retryAfter * 1000)
             : Math.min(8000, 1000 * 2 ** Math.min(this.failures - 1, 3));
         this.onError(e, delay);

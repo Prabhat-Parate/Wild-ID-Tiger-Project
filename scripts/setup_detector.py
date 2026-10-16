@@ -39,5 +39,5 @@ def main():
     features=session.run(['text_embeds'],{'input_ids':ids})[0];features/=np.linalg.norm(features,axis=-1,keepdims=True)
     np.save(OUT/'text_features.npy',features[None].astype(np.float32))
     info={'model_repo':MODEL_REPO,'model_commit':MODEL_REV,'model_file':'yolov8s-worldv2.onnx','model_license':'AGPL-3.0','labels':LABELS,'prompts':['a photo of a '+x.lower() for x in LABELS],'text_repo':TEXT_REPO,'text_commit':TEXT_REV,'text_source':'openai/clip-vit-base-patch32 (OpenAI CLIP, MIT)','text_onnx_bytes':(CACHE/'text.onnx').stat().st_size,'model_bytes':(OUT/'model.onnx').stat().st_size,'onnxruntime':ort.__version__,'sha256':{name:hashlib.sha256((OUT/name).read_bytes()).hexdigest() for name in ['model.onnx','text_features.npy']}}
-    (OUT/'manifest.json').write_text(json.dumps(info,indent=2)+'\n');print(json.dumps(info,indent=2))
+    (OUT/'manifest.json').write_text(json.dumps(info,indent=2)+'\n',encoding='utf-8');print(json.dumps(info,indent=2))
 if __name__=='__main__':main()
