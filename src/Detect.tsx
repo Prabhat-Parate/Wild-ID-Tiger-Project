@@ -259,9 +259,13 @@ export function Detect({
   function failure(e: unknown, delay?: number) {
     clear();
     setStatus(
-      e instanceof ApiError && e.status === 503
-        ? "Detector unavailable"
-        : "Detection error",
+      e instanceof ApiError &&
+        (e.status === 429 ||
+          (e.status === 503 && /busy/i.test(e.message)))
+        ? "Server busy, slowing down"
+        : e instanceof ApiError && e.status === 503
+          ? "Detector unavailable"
+          : "Detection error",
     );
     setError(
       (e as Error).message +
@@ -508,7 +512,7 @@ export function Detect({
         ctx.strokeRect(b.x, b.y, b.width, b.height);
         ctx.fillStyle = "#183c2a";
         ctx.font = "12px Arial";
-        const text = `${i + 1}. ${d.label}`;
+        const text = `${i + 1}. ${d.display_label || (d.label === "Person" ? "Person" : d.species_status === "named" ? d.label : "Animal")}`;
         ctx.fillRect(
           b.x,
           Math.max(0, b.y - 19),
@@ -537,8 +541,8 @@ export function Detect({
           <span className="eyebrow">LOCAL DETECTION / CAMERA</span>
           <h1>Detect an animal</h1>
           <p>
-            Detection locates an animal. It does not identify an individual
-            tiger.
+            Detection locates animals in a frame. It does not identify
+            individuals. This is not a Tadoba deployment or survey.
           </p>
         </div>
       </div>
@@ -747,10 +751,14 @@ export function Detect({
                   Box {i + 1}:{" "}
                   {d.label === "Person"
                     ? "Person detected, ignored"
-                    : d.label === "Tiger"
-                      ? "Tiger (model output)"
-                      : "Animal detected (species not determined)"}
-                  {d.label !== "Tiger" && d.label !== "Person" && (
+                    : d.species_status === "named"
+                      ? `${d.display_label || d.label}${d.scientific_name ? `, ${d.scientific_name}` : ""}${d.rank ? `, ${d.rank}` : ""}`
+                      : d.species_status === "higher_rank_only"
+                        ? `${d.display_label || "Higher rank only"}`
+                        : d.species_status === "not_on_reference_list"
+                          ? `${d.display_label || d.label} (Not on the Tadoba reference list)`
+                          : "Animal (species not determined)"}
+                  {d.species_status !== "named" && d.label !== "Person" && (
                     <small>
                       Raw model label: {d.label} (not verified species)
                     </small>
@@ -803,7 +811,37 @@ export function Detect({
           )}
         </div>
       </section>
+      <p>
+        Frame summary (this frame only, not a population count):{" "}
+        {detections.length
+          ? Object.entries(
+              detections.reduce<Record<string, number>>((acc, d) => {
+                const k =
+                  d.label === "Person"
+                    ? "Person (ignored)"
+                    : d.display_label || d.label;
+                acc[k] = (acc[k] || 0) + 1;
+                return acc;
+              }, {}),
+            )
+              .map(([k, n]) => `${k}: ${n}`)
+              .join("; ")
+          : "none"}
+      </p>
+      <p>
+        <a href="/help">Tadoba reference species</a> is a literature list,
+        separate from detector vocabulary. Supported flags come from the loaded
+        model labels.
+      </p>
       <section className="detector-scope">
+        {!health?.classifier_loaded && (
+          <p>
+            Species naming unavailable, showing animal boxes only. Classifier
+            weights are not loaded. Run python scripts/setup_species_model.py
+            when an ONNX export is available. Live frames are not silently
+            classified.
+          </p>
+        )}
         <h2>Detector scope & limitations</h2>
         <p>
           {health?.detector_scope ||

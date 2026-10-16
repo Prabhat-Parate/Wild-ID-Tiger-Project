@@ -1,9 +1,10 @@
 import io,json
+from pathlib import Path
 import numpy as np
 import pytest
 from PIL import Image
 from fastapi.testclient import TestClient
-from backend.main import app,buckets,validate_image,records,vectors,retrieve,report,DATA
+from backend.main import app,buckets,validate_image,records,vectors,retrieve,report,DATA,RATE_BUCKET_CAP
 from backend.retrieval import describe
 @pytest.fixture(autouse=True)
 def reset_limits():buckets.clear()
@@ -106,3 +107,12 @@ def test_dataset_information_counted_from_files_and_copied_card(client):
     candidate=client.post('/api/analyze',data={'record_id':query()['id']}).json()['candidates'][0]
     assert candidate['source_filename']==Path(candidate['source_path']).name
     assert candidate['source_annotation_path']
+
+def test_species_registry_and_ready(client):
+    r=client.get('/api/species');assert r.status_code==200;body=r.json()
+    assert 'disclaimer' in body and isinstance(body['species'],list)
+    assert body['entry_count']==len(body['species'])
+    assert all('support_flag' in s for s in body['species'])
+    ready=client.get('/api/ready');assert ready.status_code==200
+    assert 'in_flight' in ready.json() and 'rejected' in ready.json()
+    assert RATE_BUCKET_CAP>=16

@@ -1,0 +1,12 @@
+{
+  "name": "SpeciesNet crop classifier (ONNX if present)",
+  "version": "always_crop_99710272_22x8_v12_epoch_00148",
+  "licence_code": "Apache-2.0 (google/cameratrapai)",
+  "labels_file": "speciesnet.labels.txt",
+  "model_file": "model.onnx",
+  "sha256": {
+    "speciesnet.labels.txt": "e0c41415d9b29dfd6d2e2494205d1197d28595cc6f69cb129495f9827155547e"
+  },
+  "weights_present": false,
+  "note": "No ONNX weights in this tree. Naming is disabled until an operator caches hashed model.onnx."
+}

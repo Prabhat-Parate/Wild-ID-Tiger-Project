@@ -29,6 +29,11 @@ export interface Health {
   detector_score_cutoff: number | null;
   detector_scope: string;
   detector_setup: string;
+  classifier_loaded?: boolean;
+  classifier_name?: string | null;
+  classifier_version?: string | null;
+  classifier_labels?: number;
+  classifier_setup?: string;
 
   status: string;
   model_loaded: boolean;
@@ -135,10 +140,45 @@ export class ApiError extends Error {
 }
 export interface FrameDetection {
   label: string;
+  display_label?: string | null;
+  species_status?:
+    | "named"
+    | "undetermined"
+    | "not_on_reference_list"
+    | "higher_rank_only";
+  rank?: string | null;
+  scientific_name?: string | null;
+  localizer_score?: number | null;
+  classifier_score?: number | null;
+  top_k?: { label: string; scientific_name?: string | null; rank?: string; score: number }[] | null;
   score: number;
   bbox: [number, number, number, number];
   image_width: number;
   image_height: number;
+  model_name?: string | null;
+  model_version?: string | null;
+}
+export interface SpeciesEntry {
+  common_name: string;
+  scientific_name: string | null;
+  group: string;
+  tier: string | null;
+  source_urls: string[];
+  notes: string;
+  detector_label: string | null;
+  verification_status?: string;
+  detector_supported?: boolean;
+  support_flag?: string;
+}
+export interface SpeciesRegistry {
+  title?: string;
+  disclaimer: string;
+  entry_count_label?: string;
+  entry_count?: number;
+  camera_detection_limit?: string;
+  species: SpeciesEntry[];
+  detector_only_labels?: SpeciesEntry[];
+  detector_labels?: string[];
 }
 export interface DetectionResponse {
   detections: FrameDetection[];
@@ -257,6 +297,19 @@ export const api = {
       10000,
     );
   },
+  species: () =>
+    request<SpeciesRegistry>(
+      "/api/species",
+      {},
+      (v) => v && Array.isArray(v.species) && typeof v.disclaimer === "string",
+    ),
+  ready: () =>
+    request<{
+      ready: boolean;
+      detector_loaded: boolean;
+      in_flight: number;
+      rejected: number;
+    }>("/api/ready"),
   health: () =>
     request<Health>(
       "/api/health",

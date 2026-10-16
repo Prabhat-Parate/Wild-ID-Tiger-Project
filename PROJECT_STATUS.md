@@ -1,5 +1,9 @@
 # Wild-ID status — tiger-only scope, version 0.2.0
 
+## 2026-10-16
+
+Tadoba **reference** registry (not a deployment claim) plus detector vocabulary shown separately. Backend inference slots, `/api/ready`, PowerShell launchers, `scripts/doctor.py`, `scripts/load_test.py`. Detector weights were **not** present in this environment; real ONNX tests were not re-run here.
+
 ## Scope change
 
 The user explicitly replaced the original zebra/GZCD requirement with **tigers only, Hugging Face source only**, then requested **real source filenames/available metadata plus targeted scientific-honesty, comparison and evaluation improvements**, superseding the earlier metadata-hiding preference. The latest addition is real local live-camera/photo detection without replacing those workflows. The dataset/retrieval remain tiger-focused; the detector honestly handles configured non-tiger animal/person outputs, never renaming them Tiger. Existing React/Tailwind design, typed service, FastAPI descriptor pipeline, security protections, memory-only review/export foundation, tests and start scripts were adapted rather than replaced with a static mockup. Previous zebra photos, evaluations and threshold are not used/shipped.

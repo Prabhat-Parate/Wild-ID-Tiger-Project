@@ -37,7 +37,21 @@ python scripts/make_camera_fixture.py
 ./scripts/start-frontend.sh
 ```
 
-Open port **5173**. Frontend calls relative `/api`; Vite proxies internally to port 8000. This proxy is for development, not a configuration for an unrelated static host. Backend launcher respects `PORT` (default 8000); keep it at 8000 while using the bundled Vite proxy.
+Windows (PowerShell; `.sh` launchers do not run):
+
+```powershell
+$env:PYTHONUTF8 = "1"
+python scripts/doctor.py
+python scripts/setup_detector.py   # operator only, not at runtime
+python scripts/setup_species_model.py  # SpeciesNet labels; weights must be supplied as ONNX
+.\scripts\start-backend.ps1
+# second terminal:
+.\scripts\start-frontend.ps1
+```
+
+`PORT` (default 8000) is shared: uvicorn binds it and Vite proxies `/api` to `http://127.0.0.1:$PORT`. One uvicorn worker: one ONNX model copy on CPU. `--limit-concurrency 8 --timeout-keep-alive 5 --backlog 32`. If the backend appears “not responding”, check the working directory, whether another process holds 8000 (`python scripts/doctor.py`), and that the backend was started.
+
+Open port **5173**. Frontend calls relative `/api`; Vite proxies internally to `$PORT`. This proxy is for development, not a configuration for an unrelated static host.
 
 ## Local camera / photo detection and demo fallback
 

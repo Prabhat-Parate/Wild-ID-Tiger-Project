@@ -30,6 +30,32 @@ The retrieval algorithm, 512-dimensional untrained descriptor, cosine scoring an
 
 No reliable match established: this descriptor has not been validated for individual tiger re-identification, and this source has no individual-level ground truth. Evaluation keeps recorded ranks/scores separate from null identity ground truth/source and human review decisions. No individual-level ground truth available. Re-identification accuracy cannot be computed. The labelled illustrative sample is not a performed experiment, provides no numerical score, and is excluded from recorded results/exports. Software-test success is not identity accuracy.
 
+## Two-stage classifier decision — 2026-10-16
+
+Measured in this environment: **no Hugging Face, Kaggle, or GCS downloads**. PyTorch was not installed (ONNX Runtime already in requirements; SpeciesNet PyTorch stack was rejected as too large for this CPU image without weights).
+
+| Candidate | Licence (verified) | Result |
+|---|---|---|
+| SpeciesNet labels + EfficientNet V2 M | Code Apache-2.0 on GitHub; weights on Kaggle (terms not fetched) | **Labels cached** (2498). **Weights not loaded.** Coverage of Tier A mammals is species-level in the label file except Sarus crane (genus *Antigone* only) and grey-headed fish eagle (absent). |
+| MegaDetector | Typically Community Data License / MD terms on GitHub | Not downloaded. YOLO-World remains localizer. |
+| BioCLIP | Open data / model cards on HF | Not downloaded (HF blocked). CPU cost not measured. |
+
+**Runtime:** stage 1 YOLO-World if present; stage 2 ONNX crop classifier only if `model.onnx` hashes. `WILDID_CLASSIFIER=none` disables stage 2. Live video: `CLASSIFY_ON_LIVE=0` (classify on detect requests still runs if weights exist; without weights, boxes only). Latency of two-stage inference **not measured** (no classifier weights, no localizer weights in this sandbox).
+
+No labelled species evaluation: see `docs/species-evaluation.json`.
+
+## Detector decision record — 2026-10-16 (multi-species / Tadoba reference)
+
+Options evaluated; **no new weights were downloaded in this pass** (operator setup is explicit; this environment has no Hugging Face access for MegaDetector/SpeciesNet).
+
+1. **Two-stage MegaDetector + SpeciesNet** — Rejected for this checkout: weights are not in the tree, licences and Indian-fauna coverage were not verified on-device, and runtime download is forbidden. Camera-trap localizer + species classifier remains the preferred *future* path once an operator caches licensed weights.
+2. **Extend YOLO-World prompts** to every Tadoba registry name — Rejected without a labelled test: the current model already confuses tiger and leopard. Adding more look-alike prompts without evaluation would name species it cannot support honestly.
+3. **Fine-tune** — Rejected: no licensed Tadoba camera-trap set and no Forest Department permission.
+
+**Kept:** existing YOLOv8s-World v2 ONNX (`models/tiger-open-vocabulary`, AGPL-3.0, commit `7e1d02c9467c32b141df81890737490764776785`). Labels from the manifest: Tiger, Lion, Leopard, Cat, Dog, Person, Animal. Fallback remains the `Detector` protocol. Unnamed boxes: “Animal detected (species not determined)”. Score cutoff remains a configurable heuristic.
+
+No labelled per-species evaluation has been run. **No labelled evaluation has been run for these species.**
+
 ## Detector decision record — 2026-10-15
 
 ### Chosen, actually loaded and run

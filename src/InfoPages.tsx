@@ -1,8 +1,103 @@
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Clipboard } from "lucide-react";
 import { DatasetInformation } from "./DatasetInformation";
 import { project } from "./config/project";
-import type { Dataset, Health } from "./api";
+import { api, type Dataset, type Health, type SpeciesRegistry } from "./api";
+
+function TadobaRegistry() {
+  const [reg, setReg] = useState<SpeciesRegistry | null>(null);
+  const [q, setQ] = useState("");
+  const [group, setGroup] = useState("all");
+  useEffect(() => {
+    api.species().then(setReg).catch(() => setReg(null));
+  }, []);
+  const rows = useMemo(() => {
+    const list = [...(reg?.species || []), ...(reg?.detector_only_labels || [])];
+    return list.filter((s) => {
+      if (group !== "all" && s.group !== group) return false;
+      const hay = `${s.common_name} ${s.scientific_name || ""}`.toLowerCase();
+      return hay.includes(q.toLowerCase());
+    });
+  }, [reg, q, group]);
+  if (!reg)
+    return (
+      <p>
+        Tadoba reference list unavailable until the backend answers /api/species.
+      </p>
+    );
+  return (
+    <section className="tadoba-registry">
+      <h2>Tadoba reference species</h2>
+      <p>
+        {reg.disclaimer} {reg.camera_detection_limit}
+      </p>
+      <p>
+        {reg.entry_count_label || "Registry entries"}: {reg.entry_count ?? reg.species.length}.
+        This is not a total fauna count and not a claim of Tadoba validation.
+      </p>
+      <p>
+        Detector vocabulary (loaded model):{" "}
+        {(reg.detector_labels || []).join(", ") || "unavailable"}.
+      </p>
+      <label>
+        Search{" "}
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          aria-label="Search reference species"
+        />
+      </label>
+      <label>
+        Group{" "}
+        <select
+          value={group}
+          onChange={(e) => setGroup(e.target.value)}
+          aria-label="Filter by group"
+        >
+          <option value="all">All</option>
+          <option value="mammal">Mammal</option>
+          <option value="bird">Bird</option>
+          <option value="reptile">Reptile</option>
+        </select>
+      </label>
+      <table>
+        <thead>
+          <tr>
+            <th>Common name</th>
+            <th>Scientific name</th>
+            <th>Group</th>
+            <th>Tier</th>
+            <th>Detector</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((s) => (
+            <tr key={s.common_name + (s.scientific_name || "")}>
+              <td>{s.common_name}</td>
+              <td>
+                <i>{s.scientific_name || "—"}</i>
+              </td>
+              <td>{s.group}</td>
+              <td>{s.tier || "—"}</td>
+              <td>{s.support_flag}</td>
+              <td>
+                {s.source_urls?.[0] ? (
+                  <a href={s.source_urls[0]} rel="noreferrer" target="_blank">
+                    Source
+                  </a>
+                ) : (
+                  "—"
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
+}
 
 export function InfoPage({
   page,
@@ -74,6 +169,7 @@ export function InfoPage({
             annotations and the licence are recorded in DATASET.md and the local
             source inventory.
           </p>
+          <TadobaRegistry />
           <h2>What it does — and does not do</h2>
           <p>
             The backend compares real tiger photographs using an untrained
@@ -121,6 +217,7 @@ export function InfoPage({
             Compare stripe detail. A high similarity score is not proof of
             identity.
           </p>
+          <TadobaRegistry />
           <h2>Camera detection & demo fallback</h2>
           <p>
             Open <Link to="/detect">Detect Animal</Link>. Before clicking Start

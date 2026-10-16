@@ -1,3 +1,17 @@
+## 0b. Two-stage classifier (same day)
+
+SpeciesNet **labels** (Apache-2.0, 2498 classes) are in-tree. **Weights are not.** MegaDetector and BioCLIP were not downloaded. Naming of chital/sambar/sloth bear is **not** performed at runtime. Coverage table: `docs/speciesnet-coverage.json`. Evaluation: none. Load test was not re-run with both weights (neither ONNX is in this sandbox).
+
+## 0. 2026-10-16 multi-species and backend bounds
+
+Inspected in this checkout: React/TypeScript/Vite/FastAPI; `/api/detect` and `/api/analyze` as in `backend/main.py`; detector `OnnxWorldDetector` in `backend/detection.py`; labels from `models/tiger-open-vocabulary/manifest.json`: Tiger, Lion, Leopard, Cat, Dog, Person, Animal. Rate limits: detect 120/min and 2/s per hashed peer; analyze 12/min. Unbounded before this change: in-memory `buckets`/`detect_buckets` dictionaries. ONNX CPU. Windows: PowerShell launchers added; UTF-8 reads.
+
+**Models:** existing YOLO-World ONNX kept (AGPL-3.0). MegaDetector+SpeciesNet and prompt expansion rejected without on-device licensed weights / labelled tests. Fine-tune rejected (no licensed Tadoba data).
+
+**Registry:** `data/tadoba-species.json` entry count is the file size, not a fauna total. Tier B marked `unconfirmed_for_tadoba`. Detector support flags come from loaded labels (Tiger, Leopard supported among reference mammals; most species Not supported).
+
+**Backend:** inference slot cap (`INFERENCE_WORKERS`+`INFERENCE_QUEUE`), 503+Retry-After when full, rate-bucket cap, `/api/ready`, rotating logs, kill-switch `WILDID_DETECTOR=none`, max-side downscale, ONNX thread env, stream body cap retained. Load-test numbers are only those written by `scripts/load_test.py` when that script is run against a live server.
+
 ## 1. Inspection discrepancy, chosen detector and alternatives
 
 **Inspected first:** React/TypeScript, Vite, React Router and FastAPI confirmed from code. Contrary to this request's assumption, detector/camera code already existed in the current workspace. Verified and reused it rather than duplicating it. This request adds a **Camera detection** option beside Identify's upload controls linking to the existing `/detect` route; the navigation array/design remain unchanged. See `docs/camera-request-inspection.md` for routes, API contracts and rate-limit findings.
